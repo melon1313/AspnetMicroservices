@@ -18,6 +18,7 @@
     "Basket.API": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "api/v1/Basket",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
