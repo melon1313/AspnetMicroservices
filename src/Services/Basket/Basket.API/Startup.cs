@@ -1,3 +1,4 @@
+using Basket.API.GrpcServices;
 using Basket.API.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Discount.Grpc.Protos.DiscountProtoService;
 
 namespace Basket.API
 {
@@ -34,7 +36,10 @@ namespace Basket.API
 
             services.AddScoped<IBasketRepository, BasketRepository>();
 
-            
+            services.AddGrpcClient<DiscountProtoServiceClient>
+                (option => option.Address = new Uri(Configuration["GrpcSettings:DiscountUrl"]));
+
+            services.AddScoped<DiscountGrpcService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
